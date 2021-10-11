@@ -1,16 +1,74 @@
-import * as React from 'react';
-import { StyleSheet } from 'react-native';
+import * as React from "react";
+import { Dimensions, SafeAreaView, ScrollView, StyleSheet } from "react-native";
+import IdeaCard from "../components/IdeaCard";
 
-import EditScreenInfo from '../components/EditScreenInfo';
-import { Text, View } from '../components/Themed';
-import { RootTabScreenProps } from '../types';
+import { Text, View } from "../components/Themed";
+import storageHelper from "../storage/StorageHelper";
+import { Idea, RootTabScreenProps } from "../types";
 
-export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'>) {
+export default function TabOneScreen({
+  navigation,
+}: RootTabScreenProps<"TabOne">) {
+  const [ideasLoaded, setIdeasLoaded] = React.useState(false);
+  const [ideasElementsLeft, setIdeasElementsLeft] = React.useState<
+    JSX.Element[]
+  >([]);
+  const [ideasElementsRight, setIdeasElementsRight] = React.useState<
+    JSX.Element[]
+  >([]);
+
+  if (
+    ideasElementsLeft.length === 0 &&
+    ideasElementsRight.length === 0 &&
+    !ideasLoaded
+  ) {
+    storageHelper.getAllItems().then(
+      (value) => {
+        if (value !== undefined) {
+          let cpt = 0;
+          value.forEach((element) => {
+            cpt++;
+            if (cpt % 2 === 1) {
+              setIdeasElementsLeft((ideasElementsLeft) => [
+                ...ideasElementsLeft,
+                <IdeaCard
+                  key={element.key}
+                  color={element.color}
+                  title={element.title}
+                  description={element.description}
+                ></IdeaCard>,
+              ]);
+            } else {
+              setIdeasElementsRight((ideasElementsRight) => [
+                ...ideasElementsRight,
+                <IdeaCard
+                  key={element.key}
+                  color={element.color}
+                  title={element.title}
+                  description={element.description}
+                ></IdeaCard>,
+              ]);
+            }
+          });
+          setIdeasLoaded(true);
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="/screens/TabOneScreen.tsx" />
+      <SafeAreaView style={[{ flex: 1, flexDirection: "row" }]}>
+        <ScrollView>
+          <View style={[{ flexDirection: "row" }]}>
+            <View style={[styles.column]}>{ideasElementsRight}</View>
+            <View style={[styles.column]}>{ideasElementsLeft}</View>
+          </View>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }
@@ -18,16 +76,15 @@ export default function TabOneScreen({ navigation }: RootTabScreenProps<'TabOne'
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "flex-start",
+  },
+  column: {
+    flex: 1,
+    flexDirection: "column",
+    alignItems: "center",
   },
   title: {
     fontSize: 20,
-    fontWeight: 'bold',
-  },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+    fontWeight: "bold",
   },
 });

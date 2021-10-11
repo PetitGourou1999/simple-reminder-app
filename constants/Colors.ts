@@ -8,6 +8,11 @@ export default {
     tint: tintColorLight,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorLight,
+    selectedColor:'#888',
+    primary:'#ff9f1C',
+    secondary:'#ffbf69',
+    tertiary:'#2ec4b6',
+    quaternary:'#cbf3f0',
   },
   dark: {
     text: '#fff',
@@ -15,5 +20,10 @@ export default {
     tint: tintColorDark,
     tabIconDefault: '#ccc',
     tabIconSelected: tintColorDark,
+    selectedColor:'#fff',
+    primary:'#ff9f1C',
+    secondary:'#ffbf69',
+    tertiary:'#2ec4b6',
+    quaternary:'#cbf3f0',
   },
 };
