@@ -16,9 +16,12 @@ import { ColorSchemeName, Pressable } from "react-native";
 
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
-import ModalScreen from "../screens/ModalScreen";
+import ModalScreenIdea from "../screens/ModalScreenIdea";
+import ModalScreen from "../screens/ModalScreenIdea";
+import ModalScreenReminder from "../screens/ModalScreenReminder";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import TabOneScreen from "../screens/TabOneScreen";
+import TabTwoScreen from "../screens/TabTwoScreen";
 import {
   RootStackParamList,
   RootStackScreenProps,
@@ -63,10 +66,19 @@ function RootNavigator() {
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
-          name="Modal"
-          component={ModalScreen}
-          options={({ navigation }: RootStackScreenProps<"Modal">) => ({
+          name="ModalIdea"
+          component={ModalScreenIdea}
+          options={({ navigation }: RootStackScreenProps<"ModalIdea">) => ({
             title: "Nouvelle idée",
+          })}
+        />
+      </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="ModalReminder"
+          component={ModalScreenReminder}
+          options={({ navigation }: RootStackScreenProps<"ModalReminder">) => ({
+            title: "Nouveau rappel",
           })}
         />
       </Stack.Group>
@@ -87,7 +99,7 @@ function BottomTabNavigator() {
     <BottomTab.Navigator
       initialRouteName="TabOne"
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme].tint,
+        tabBarActiveTintColor: Colors[colorScheme].tabIconSelected,
       }}
     >
       <BottomTab.Screen
@@ -98,7 +110,30 @@ function BottomTabNavigator() {
           tabBarIcon: ({ color }) => <TabBarIcon name="paste" color={color} />,
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Modal")}
+              onPress={() => navigation.navigate("ModalIdea")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="plus-circle"
+                size={25}
+                color={Colors[colorScheme].text}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
+      />
+      <BottomTab.Screen
+        name="TabTwo"
+        component={TabTwoScreen}
+        options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
+          title: "Mes rappels",
+          tabBarIcon: ({ color }) => <TabBarIcon name="bell-o" color={color} />,
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("ModalReminder")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

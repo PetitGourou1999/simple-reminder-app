@@ -73,17 +73,6 @@ class StorageHelper {
       console.log(e);
     }
   };
-
-  public getAllItemsNoPromise = () => {
-    this.getAllItems().then(
-      (value) => {
-        return value;
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-  };
 }
 
 const storageHelper = new StorageHelper();

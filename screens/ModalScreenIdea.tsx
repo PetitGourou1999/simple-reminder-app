@@ -1,4 +1,3 @@
-import { StatusBar } from "expo-status-bar";
 import * as React from "react";
 import {
   Alert,
@@ -20,9 +19,9 @@ import storageHelper from "../storage/StorageHelper";
 import { Idea, RootStackScreenProps } from "../types";
 import TabOneScreen from "./TabOneScreen";
 
-export default function ModalScreen({
+export default function ModalScreenIdea({
   navigation,
-}: RootStackScreenProps<"Modal">) {
+}: RootStackScreenProps<"ModalIdea">) {
   const colorScheme = useColorScheme();
   const [selectedColor, setSlectedColor] = React.useState(cardColors[0].color);
   const [ideaTitle, setIdeaTitle] = React.useState("");

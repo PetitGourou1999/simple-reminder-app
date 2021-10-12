@@ -23,9 +23,19 @@ export type Idea = {
   description: string;
 };
 
+export type Reminder = {
+  key: string;
+  color: string;
+  title: string;
+  description: string;
+  startDate: Date;
+  endDate: Date;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
-  Modal: undefined;
+  ModalIdea: undefined;
+  ModalReminder: undefined;
   NotFound: undefined;
 };
 
