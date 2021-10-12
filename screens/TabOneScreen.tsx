@@ -44,6 +44,8 @@ export default function TabOneScreen({
     ) {
       storageHelper.getAllItems().then(
         (value) => {
+          setIdeasElementsLeft((ideasElementsLeft) => []);
+          setIdeasElementsRight((ideasElementsRight) => []);
           if (value !== undefined) {
             let cpt = 0;
             value.forEach((element) => {
@@ -75,8 +77,6 @@ export default function TabOneScreen({
   const onRefresh = React.useCallback(() => {
     setRefreshing(true);
     setIdeasLoaded(false);
-    setIdeasElementsLeft([]);
-    setIdeasElementsRight([]);
 
     wait(2000).then(() => {
       loadItems();
