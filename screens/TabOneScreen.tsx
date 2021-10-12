@@ -1,7 +1,5 @@
-import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import {
-  Dimensions,
   RefreshControl,
   SafeAreaView,
   ScrollView,
@@ -10,7 +8,7 @@ import {
 } from "react-native";
 import IdeaCard from "../components/IdeaCard";
 
-import { Text, View } from "../components/Themed";
+import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
