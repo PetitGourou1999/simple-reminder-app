@@ -68,8 +68,6 @@ class StorageHelper {
     try {
       const keys = await AsyncStorage.getAllKeys();
       const items = await this.getMultiple(keys);
-      console.log("Retrieved items : ");
-      console.log(items);
       return items;
     } catch (e) {
       console.log(e);

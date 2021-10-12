@@ -69,7 +69,7 @@ export default function ModalScreen({
         style={[
           globalStyles.input,
           {
-            borderColor: Colors[colorScheme].text,
+            backgroundColor: Colors[colorScheme].textBackground,
             color: Colors[colorScheme].text,
           },
         ]}
@@ -82,7 +82,7 @@ export default function ModalScreen({
         style={[
           globalStyles.input,
           {
-            borderColor: Colors[colorScheme].text,
+            backgroundColor: Colors[colorScheme].textBackground,
             color: Colors[colorScheme].text,
             minHeight: 150,
           },
