@@ -47,18 +47,21 @@ export default function TabOneScreen({
           if (value !== undefined) {
             let cpt = 0;
             value.forEach((element) => {
-              if (cpt % 2 === 0) {
-                setIdeasElementsLeft((ideasElementsLeft) => [
-                  ...ideasElementsLeft,
-                  element,
-                ]);
-              } else {
-                setIdeasElementsRight((ideasElementsRight) => [
-                  ...ideasElementsRight,
-                  element,
-                ]);
+              //Vérification pas rappel
+              if (element.dateTime === undefined) {
+                if (cpt % 2 === 0) {
+                  setIdeasElementsLeft((ideasElementsLeft) => [
+                    ...ideasElementsLeft,
+                    element,
+                  ]);
+                } else {
+                  setIdeasElementsRight((ideasElementsRight) => [
+                    ...ideasElementsRight,
+                    element,
+                  ]);
+                }
+                cpt++;
               }
-              cpt++;
             });
             setIdeasLoaded(true);
           }

@@ -1,9 +1,8 @@
 import * as React from "react";
 import {
   Alert,
-  Platform,
-  Pressable,
   SafeAreaView,
+  ScrollView,
   StyleSheet,
   TextInput,
 } from "react-native";
@@ -14,18 +13,18 @@ import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
-import Navigation from "../navigation";
 import storageHelper from "../storage/StorageHelper";
 import { Idea, RootStackScreenProps } from "../types";
-import TabOneScreen from "./TabOneScreen";
 
 export default function ModalScreenIdea({
   navigation,
 }: RootStackScreenProps<"ModalIdea">) {
   const colorScheme = useColorScheme();
   const [selectedColor, setSlectedColor] = React.useState(cardColors[0].color);
+
   const [ideaTitle, setIdeaTitle] = React.useState("");
   const [ideaDescription, setIdeaDescritpion] = React.useState("");
+
   var myIdea: Idea = {
     key: "",
     color: "",
@@ -50,72 +49,76 @@ export default function ModalScreenIdea({
 
   return (
     <View style={styles.container}>
-      <Text>Couleur : </Text>
-      <View
-        style={[
-          {
-            minWidth: "80%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          },
-        ]}
-      >
-        {buttonsListArr}
-      </View>
-      <Text>Titre de l'idée : </Text>
-      <TextInput
-        onChangeText={(text) => setIdeaTitle(text)}
-        style={[
-          globalStyles.input,
-          {
-            backgroundColor: Colors[colorScheme].textBackground,
-            color: Colors[colorScheme].text,
-          },
-        ]}
-      />
-      <Text>Description de l'idée : </Text>
-      <TextInput
-        onChangeText={(text) => setIdeaDescritpion(text)}
-        multiline={true}
-        numberOfLines={5}
-        style={[
-          globalStyles.input,
-          {
-            backgroundColor: Colors[colorScheme].textBackground,
-            color: Colors[colorScheme].text,
-            minHeight: 150,
-          },
-        ]}
-      />
-      <TouchableOpacity
-        onPress={() => {
-          myIdea.key = storageHelper.makeid(8);
-          myIdea.color = selectedColor;
-          myIdea.title = ideaTitle;
-          myIdea.description = ideaDescription;
-          if (ideaTitle.trim() === "" || ideaDescription.trim() === "") {
-            Alert.alert(
-              "Saisie invalide",
-              "L'un des champs n'a pas été renseigné"
-            );
-          } else {
-            storageHelper.storeData(myIdea.key, myIdea).then(
-              () => {
-                navigation.goBack();
+      <SafeAreaView>
+        <ScrollView contentContainerStyle={[styles.container]}>
+          <Text>Couleur : </Text>
+          <View
+            style={[
+              {
+                minWidth: "80%",
+                flexDirection: "row",
+                justifyContent: "space-around",
               },
-              (error) => {
-                console.log(error);
+            ]}
+          >
+            {buttonsListArr}
+          </View>
+          <Text>Titre de l'idée : </Text>
+          <TextInput
+            onChangeText={(text) => setIdeaTitle(text)}
+            style={[
+              globalStyles.input,
+              {
+                backgroundColor: Colors[colorScheme].textBackground,
+                color: Colors[colorScheme].text,
+              },
+            ]}
+          />
+          <Text>Description de l'idée : </Text>
+          <TextInput
+            onChangeText={(text) => setIdeaDescritpion(text)}
+            multiline={true}
+            numberOfLines={5}
+            style={[
+              globalStyles.input,
+              {
+                backgroundColor: Colors[colorScheme].textBackground,
+                color: Colors[colorScheme].text,
+                minHeight: "20%",
+              },
+            ]}
+          />
+          <TouchableOpacity
+            onPress={() => {
+              myIdea.key = storageHelper.makeid(8);
+              myIdea.color = selectedColor;
+              myIdea.title = ideaTitle;
+              myIdea.description = ideaDescription;
+              if (ideaTitle.trim() === "" || ideaDescription.trim() === "") {
+                Alert.alert(
+                  "Saisie invalide",
+                  "L'un des champs n'a pas été renseigné"
+                );
+              } else {
+                storageHelper.storeData(myIdea.key, myIdea).then(
+                  () => {
+                    navigation.goBack();
+                  },
+                  (error) => {
+                    console.log(error);
+                  }
+                );
               }
-            );
-          }
-        }}
-        style={[
-          globalStyles.button,
-          { backgroundColor: Colors[colorScheme].primary },
-        ]}
-      >
-        <Text>Ajouter</Text>
-      </TouchableOpacity>
+            }}
+            style={[
+              globalStyles.button,
+              { backgroundColor: Colors[colorScheme].primary },
+            ]}
+          >
+            <Text>Ajouter</Text>
+          </TouchableOpacity>
+        </ScrollView>
+      </SafeAreaView>
     </View>
   );
 }

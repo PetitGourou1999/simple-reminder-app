@@ -28,8 +28,7 @@ export type Reminder = {
   color: string;
   title: string;
   description: string;
-  startDate: Date;
-  endDate: Date;
+  dateTime: Date;
 };
 
 export type RootStackParamList = {
