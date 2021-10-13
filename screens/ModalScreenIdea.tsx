@@ -27,7 +27,7 @@ export default function ModalScreenIdea({
   const [ideaTitle, setIdeaTitle] = React.useState("");
   const [ideaDescription, setIdeaDescritpion] = React.useState("");
   var myIdea: Idea = {
-    key: "",
+    storageKey: "",
     color: "",
     title: "",
     description: "",
@@ -89,7 +89,7 @@ export default function ModalScreenIdea({
       />
       <TouchableOpacity
         onPress={() => {
-          myIdea.key = storageHelper.makeid(8);
+          myIdea.storageKey = storageHelper.makeid(8);
           myIdea.color = selectedColor;
           myIdea.title = ideaTitle;
           myIdea.description = ideaDescription;
@@ -99,7 +99,7 @@ export default function ModalScreenIdea({
               "L'un des champs n'a pas été renseigné"
             );
           } else {
-            storageHelper.storeData(myIdea.key, myIdea).then(
+            storageHelper.storeData(myIdea.storageKey, myIdea).then(
               () => {
                 navigation.goBack();
               },

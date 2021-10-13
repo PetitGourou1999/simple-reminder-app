@@ -119,7 +119,8 @@ export default function TabTwoScreen({
                 .map((val, key) => {
                   return (
                     <IdeaCard
-                      key={val.key}
+                      key={val.storageKey}
+                      storageKey={val.storageKey}
                       color={val.color}
                       title={val.title}
                       description={val.description}
@@ -141,7 +142,8 @@ export default function TabTwoScreen({
                 .map((val, key) => {
                   return (
                     <IdeaCard
-                      key={val.key}
+                      key={val.storageKey}
+                      storageKey={val.storageKey}
                       color={val.color}
                       title={val.title}
                       description={val.description}

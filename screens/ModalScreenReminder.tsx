@@ -80,7 +80,7 @@ export default function ModalScreenReminder({
   };
 
   var myReminder: Reminder = {
-    key: "",
+    storageKey: "",
     color: "",
     title: "",
     description: "",
@@ -193,7 +193,7 @@ export default function ModalScreenReminder({
           />
           <TouchableOpacity
             onPress={() => {
-              myReminder.key = storageHelper.makeid(8);
+              myReminder.storageKey = storageHelper.makeid(8);
               myReminder.color = selectedColor;
               myReminder.title = reminderTitle;
               myReminder.description = reminderDescription;
@@ -207,7 +207,7 @@ export default function ModalScreenReminder({
                   "L'un des champs n'a pas été renseigné"
                 );
               } else {
-                storageHelper.storeData(myReminder.key, myReminder).then(
+                storageHelper.storeData(myReminder.storageKey, myReminder).then(
                   () => {
                     //NotificationSender(myReminder);
                     navigation.goBack();

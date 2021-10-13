@@ -42,6 +42,7 @@ export default function TabOneScreen({
     ) {
       storageHelper.getAllItems().then(
         (value) => {
+          console.log(value);
           setIdeasElementsLeft((ideasElementsLeft) => []);
           setIdeasElementsRight((ideasElementsRight) => []);
           if (value !== undefined) {
@@ -115,14 +116,17 @@ export default function TabOneScreen({
                   }
                 })
                 .map((val, key) => {
-                  return (
-                    <IdeaCard
-                      key={val.key}
-                      color={val.color}
-                      title={val.title}
-                      description={val.description}
-                    ></IdeaCard>
-                  );
+                  if (val !== null) {
+                    return (
+                      <IdeaCard
+                        key={val.storageKey}
+                        storageKey={val.storageKey}
+                        color={val.color}
+                        title={val.title}
+                        description={val.description}
+                      ></IdeaCard>
+                    );
+                  }
                 })}
             </View>
             <View style={[styles.column]}>
@@ -137,14 +141,17 @@ export default function TabOneScreen({
                   }
                 })
                 .map((val, key) => {
-                  return (
-                    <IdeaCard
-                      key={val.key}
-                      color={val.color}
-                      title={val.title}
-                      description={val.description}
-                    ></IdeaCard>
-                  );
+                  if (val !== null) {
+                    return (
+                      <IdeaCard
+                        key={val.storageKey}
+                        storageKey={val.storageKey}
+                        color={val.color}
+                        title={val.title}
+                        description={val.description}
+                      ></IdeaCard>
+                    );
+                  }
                 })}
             </View>
           </View>

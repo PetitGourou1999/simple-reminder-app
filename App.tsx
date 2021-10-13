@@ -9,6 +9,7 @@ import useColorScheme from "./hooks/useColorScheme";
 import Navigation from "./navigation";
 import { shouldUseActivityState } from "react-native-screens";
 import notificationHelper from "./storage/NotificationsHelper";
+import storageHelper from "./storage/StorageHelper";
 
 Notifications.setNotificationHandler({
   handleNotification: async () => {

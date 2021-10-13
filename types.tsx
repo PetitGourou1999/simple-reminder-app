@@ -17,14 +17,14 @@ declare global {
 }
 
 export type Idea = {
-  key: string;
+  storageKey: string;
   color: string;
   title: string;
   description: string;
 };
 
 export type Reminder = {
-  key: string;
+  storageKey: string;
   color: string;
   title: string;
   description: string;
