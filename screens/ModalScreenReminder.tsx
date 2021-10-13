@@ -17,11 +17,43 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import storageHelper from "../storage/StorageHelper";
 import { FontAwesome } from "@expo/vector-icons";
 import notificationHelper from "../storage/NotificationsHelper";
+import useIsMounted from "../hooks/useIsMounted";
+
+/*function NotificationSender(reminder: Reminder) {
+  const isMounted = useIsMounted();
+  const [expoPushToken, setExpoPushToken] = React.useState("");
+  const [notification, setNotification] = React.useState(false);
+
+  React.useEffect(() => {
+    notificationHelper.askPermissions().then(
+      (token) => {
+        if (token !== undefined) {
+          setExpoPushToken(token);
+          notificationHelper
+            .scheduleNotification(reminder.title, "", reminder.dateTime)
+            .then(
+              () => {
+                console.log("Sent");
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+        }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }, [isMounted]);
+  return <View></View>;
+}*/
 
 export default function ModalScreenReminder({
   navigation,
 }: RootStackScreenProps<"ModalReminder">) {
   const colorScheme = useColorScheme();
+
   const [selectedColor, setSlectedColor] = React.useState(cardColors[0].color);
 
   const [reminderTitle, setReminderTitle] = React.useState("");
@@ -30,6 +62,9 @@ export default function ModalScreenReminder({
   const [reminderDateStart, setReminderDateStart] = React.useState(new Date());
 
   const [isDatePickerVisible, setDatePickerVisibility] = React.useState(false);
+
+  const [expoPushToken, setExpoPushToken] = React.useState("");
+  const [notification, setNotification] = React.useState(false);
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -174,6 +209,7 @@ export default function ModalScreenReminder({
               } else {
                 storageHelper.storeData(myReminder.key, myReminder).then(
                   () => {
+                    //NotificationSender(myReminder);
                     navigation.goBack();
                   },
                   (error) => {

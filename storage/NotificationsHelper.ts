@@ -36,16 +36,19 @@ class NotificationsHelper {
     return token;
   };
 
-  public scheduleNotification = async (title: string, body: string) => {
+  public scheduleNotification = async (
+    title: string,
+    body: string,
+    date: Date
+  ) => {
     Notifications.scheduleNotificationAsync({
       content: {
         title: title,
         body: body,
-        data: {},
       },
       trigger: {
+        date: date,
         repeats: false,
-        seconds: 10,
       },
     });
   };
