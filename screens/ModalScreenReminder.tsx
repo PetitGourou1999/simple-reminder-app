@@ -16,6 +16,7 @@ import globalStyles from "../constants/Styles";
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import storageHelper from "../storage/StorageHelper";
 import { FontAwesome } from "@expo/vector-icons";
+import notificationHelper from "../storage/NotificationsHelper";
 
 export default function ModalScreenReminder({
   navigation,

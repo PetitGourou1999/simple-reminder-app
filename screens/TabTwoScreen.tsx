@@ -3,6 +3,7 @@ import { View } from "../components/Themed";
 import { RootTabScreenProps } from "../types";
 
 import { StyleSheet } from "react-native";
+import notificationHelper from "../storage/NotificationsHelper";
 
 export default function TabTwoScreen({
   navigation,

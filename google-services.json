@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "168591474512",
+    "project_id": "reminders-5f771",
+    "storage_bucket": "reminders-5f771.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:168591474512:android:167454a73821fa323bb655",
+        "android_client_info": {
+          "package_name": "com.megann.reminders"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "168591474512-8qk2onmn4ar4ntjqrjmvh5tpj8v8926s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA657sm4UKkvylewmXJNEgU3PGotIngfbs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "168591474512-8qk2onmn4ar4ntjqrjmvh5tpj8v8926s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

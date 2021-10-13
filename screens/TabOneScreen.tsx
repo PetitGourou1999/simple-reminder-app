@@ -47,6 +47,7 @@ export default function TabOneScreen({
           if (value !== undefined) {
             let cpt = 0;
             value.forEach((element) => {
+              //console.error(element);
               //Vérification pas rappel
               if (element.dateTime === undefined) {
                 if (cpt % 2 === 0) {

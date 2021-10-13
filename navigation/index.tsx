@@ -118,7 +118,7 @@ function BottomTabNavigator() {
               <FontAwesome
                 name="plus-circle"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors[colorScheme].secondary}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
@@ -141,7 +141,7 @@ function BottomTabNavigator() {
               <FontAwesome
                 name="plus-circle"
                 size={25}
-                color={Colors[colorScheme].text}
+                color={Colors[colorScheme].secondary}
                 style={{ marginRight: 15 }}
               />
             </Pressable>
