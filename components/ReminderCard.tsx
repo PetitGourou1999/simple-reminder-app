@@ -4,19 +4,19 @@ import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import storageHelper from "../storage/StorageHelper";
 
-import { Idea } from "../types";
+import { Idea, Reminder } from "../types";
 import { View, Text } from "./Themed";
 
-export default function IdeaCard(idea: Idea) {
+export default function ReminderCard(reminder: Reminder) {
   return (
-    <View style={[styles.container, { backgroundColor: idea.color }]}>
-      <View style={[styles.topBar, { backgroundColor: idea.color }]}>
-        <Text style={styles.title}>{idea.title}</Text>
+    <View style={[styles.container, { backgroundColor: reminder.color }]}>
+      <View style={[styles.topBar, { backgroundColor: reminder.color }]}>
+        <Text style={styles.title}>{reminder.title}</Text>
         <TouchableOpacity
           onPress={() => {
             Alert.alert(
               "Attention",
-              "Voulez-vous vraiment supprimer cette idée ?",
+              "Voulez-vous vraiment supprimer ce rappel ?",
               [
                 {
                   text: "Non",
@@ -25,8 +25,7 @@ export default function IdeaCard(idea: Idea) {
                 {
                   text: "Oui",
                   onPress: () => {
-                    console.log(idea);
-                    storageHelper.removeData(idea.storageKey).then(
+                    storageHelper.removeData(reminder.storageKey).then(
                       () => {
                         console.log("Item removed");
                       },
@@ -43,7 +42,17 @@ export default function IdeaCard(idea: Idea) {
           <FontAwesome name="trash" size={20} color={"#000"}></FontAwesome>
         </TouchableOpacity>
       </View>
-      <Text style={styles.description}>{idea.description}</Text>
+      <Text style={styles.description}>{reminder.description}</Text>
+      <Text style={styles.dateText}>
+        {"le " +
+          new Date(reminder.dateTime).toLocaleDateString([], {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+          })}
+      </Text>
     </View>
   );
 }
@@ -70,5 +79,14 @@ const styles = StyleSheet.create({
   description: {
     color: "#000",
     fontSize: 14,
+    marginBottom: 10,
+  },
+  dateText: {
+    color: "#000",
+    fontSize: 12,
+    borderColor: "#000",
+    borderWidth: 1,
+    borderRadius: 2,
+    padding: 5,
   },
 });

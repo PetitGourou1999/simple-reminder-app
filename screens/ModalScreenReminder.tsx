@@ -84,7 +84,7 @@ export default function ModalScreenReminder({
     color: "",
     title: "",
     description: "",
-    dateTime: new Date("1900-01-01"),
+    dateTime: new Date(),
   };
 
   const buttonsListArr = cardColors.map((colorInfo) => (
@@ -132,7 +132,7 @@ export default function ModalScreenReminder({
               isVisible={isDatePickerVisible}
               mode="datetime"
               onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
+              onCancel={handleConfirm}
               minimumDate={new Date()}
               locale="fr-FR"
             />
@@ -197,10 +197,10 @@ export default function ModalScreenReminder({
               myReminder.color = selectedColor;
               myReminder.title = reminderTitle;
               myReminder.description = reminderDescription;
+              myReminder.dateTime = reminderDateStart;
               if (
                 reminderTitle.trim() === "" ||
-                reminderDescription.trim() === "" ||
-                reminderDateStart === new Date("1900-01-01")
+                reminderDescription.trim() === ""
               ) {
                 Alert.alert(
                   "Saisie invalide",

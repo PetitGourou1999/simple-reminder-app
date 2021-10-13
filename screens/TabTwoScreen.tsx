@@ -15,6 +15,7 @@ import storageHelper from "../storage/StorageHelper";
 import globalStyles from "../constants/Styles";
 import Colors from "../constants/Colors";
 import IdeaCard from "../components/IdeaCard";
+import ReminderCard from "../components/ReminderCard";
 
 const wait = (timeout: number) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
@@ -118,13 +119,14 @@ export default function TabTwoScreen({
                 })
                 .map((val, key) => {
                   return (
-                    <IdeaCard
+                    <ReminderCard
                       key={val.storageKey}
                       storageKey={val.storageKey}
                       color={val.color}
                       title={val.title}
                       description={val.description}
-                    ></IdeaCard>
+                      dateTime={val.dateTime}
+                    ></ReminderCard>
                   );
                 })}
             </View>
@@ -141,13 +143,14 @@ export default function TabTwoScreen({
                 })
                 .map((val, key) => {
                   return (
-                    <IdeaCard
+                    <ReminderCard
                       key={val.storageKey}
                       storageKey={val.storageKey}
                       color={val.color}
                       title={val.title}
                       description={val.description}
-                    ></IdeaCard>
+                      dateTime={val.dateTime}
+                    ></ReminderCard>
                   );
                 })}
             </View>
