@@ -31,6 +31,16 @@ export type Reminder = {
   dateTime: Date;
 };
 
+export type IdeaCardParamsList = {
+  idea: Idea;
+  onRemoveItem: any;
+};
+
+export type ReminderCardParamsList = {
+  reminder: Reminder;
+  onRemoveItem: any;
+};
+
 export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   ModalIdea: undefined;

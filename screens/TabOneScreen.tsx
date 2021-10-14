@@ -34,6 +34,20 @@ export default function TabOneScreen({
 
   const [refreshing, setRefreshing] = React.useState(false);
 
+  const removeItem = (storageKey: string) => {
+    storageHelper.removeData(storageKey).then(
+      () => {
+        setIdeasElementsLeft((ideasElementsLeft) => []);
+        setIdeasElementsRight((ideasElementsRight) => []);
+        setIdeasLoaded(false);
+        loadItems();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
   const loadItems = () => {
     if (
       ideasElementsLeft.length === 0 &&
@@ -42,13 +56,11 @@ export default function TabOneScreen({
     ) {
       storageHelper.getAllItems().then(
         (value) => {
-          console.log(value);
           setIdeasElementsLeft((ideasElementsLeft) => []);
           setIdeasElementsRight((ideasElementsRight) => []);
           if (value !== undefined) {
             let cpt = 0;
             value.forEach((element) => {
-              //console.error(element);
               //Vérification pas rappel
               if (element.dateTime === undefined) {
                 if (cpt % 2 === 0) {
@@ -120,10 +132,8 @@ export default function TabOneScreen({
                     return (
                       <IdeaCard
                         key={val.storageKey}
-                        storageKey={val.storageKey}
-                        color={val.color}
-                        title={val.title}
-                        description={val.description}
+                        idea={val}
+                        onRemoveItem={() => removeItem(val.storageKey)}
                       ></IdeaCard>
                     );
                   }
@@ -145,10 +155,8 @@ export default function TabOneScreen({
                     return (
                       <IdeaCard
                         key={val.storageKey}
-                        storageKey={val.storageKey}
-                        color={val.color}
-                        title={val.title}
-                        description={val.description}
+                        idea={val}
+                        onRemoveItem={() => removeItem(val.storageKey)}
                       ></IdeaCard>
                     );
                   }

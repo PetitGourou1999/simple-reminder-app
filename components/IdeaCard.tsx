@@ -4,42 +4,15 @@ import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import storageHelper from "../storage/StorageHelper";
 
-import { Idea } from "../types";
+import { Idea, IdeaCardParamsList } from "../types";
 import { View, Text } from "./Themed";
 
-export default function IdeaCard(idea: Idea) {
+export default function IdeaCard({ idea, onRemoveItem }: IdeaCardParamsList) {
   return (
     <View style={[styles.container, { backgroundColor: idea.color }]}>
       <View style={[styles.topBar, { backgroundColor: idea.color }]}>
         <Text style={styles.title}>{idea.title}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              "Attention",
-              "Voulez-vous vraiment supprimer cette idée ?",
-              [
-                {
-                  text: "Non",
-                  style: "cancel",
-                },
-                {
-                  text: "Oui",
-                  onPress: () => {
-                    console.log(idea);
-                    storageHelper.removeData(idea.storageKey).then(
-                      () => {
-                        console.log("Item removed");
-                      },
-                      (error) => {
-                        console.log(error);
-                      }
-                    );
-                  },
-                },
-              ]
-            );
-          }}
-        >
+        <TouchableOpacity onPress={() => onRemoveItem()}>
           <FontAwesome name="trash" size={20} color={"#000"}></FontAwesome>
         </TouchableOpacity>
       </View>

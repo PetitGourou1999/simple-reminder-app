@@ -38,6 +38,20 @@ export default function TabTwoScreen({
 
   const [refreshing, setRefreshing] = React.useState(false);
 
+  const removeItem = (storageKey: string) => {
+    storageHelper.removeData(storageKey).then(
+      () => {
+        setIdeasElementsLeft((ideasElementsLeft) => []);
+        setIdeasElementsRight((ideasElementsRight) => []);
+        setIdeasLoaded(false);
+        loadItems();
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  };
+
   const loadItems = () => {
     if (
       ideasElementsLeft.length === 0 &&
@@ -121,11 +135,8 @@ export default function TabTwoScreen({
                   return (
                     <ReminderCard
                       key={val.storageKey}
-                      storageKey={val.storageKey}
-                      color={val.color}
-                      title={val.title}
-                      description={val.description}
-                      dateTime={val.dateTime}
+                      reminder={val}
+                      onRemoveItem={() => removeItem(val.storageKey)}
                     ></ReminderCard>
                   );
                 })}
@@ -145,11 +156,8 @@ export default function TabTwoScreen({
                   return (
                     <ReminderCard
                       key={val.storageKey}
-                      storageKey={val.storageKey}
-                      color={val.color}
-                      title={val.title}
-                      description={val.description}
-                      dateTime={val.dateTime}
+                      reminder={val}
+                      onRemoveItem={() => removeItem(val.storageKey)}
                     ></ReminderCard>
                   );
                 })}

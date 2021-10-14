@@ -4,41 +4,18 @@ import { Alert, StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import storageHelper from "../storage/StorageHelper";
 
-import { Idea, Reminder } from "../types";
+import { Idea, Reminder, ReminderCardParamsList } from "../types";
 import { View, Text } from "./Themed";
 
-export default function ReminderCard(reminder: Reminder) {
+export default function ReminderCard({
+  reminder,
+  onRemoveItem,
+}: ReminderCardParamsList) {
   return (
     <View style={[styles.container, { backgroundColor: reminder.color }]}>
       <View style={[styles.topBar, { backgroundColor: reminder.color }]}>
         <Text style={styles.title}>{reminder.title}</Text>
-        <TouchableOpacity
-          onPress={() => {
-            Alert.alert(
-              "Attention",
-              "Voulez-vous vraiment supprimer ce rappel ?",
-              [
-                {
-                  text: "Non",
-                  style: "cancel",
-                },
-                {
-                  text: "Oui",
-                  onPress: () => {
-                    storageHelper.removeData(reminder.storageKey).then(
-                      () => {
-                        console.log("Item removed");
-                      },
-                      (error) => {
-                        console.log(error);
-                      }
-                    );
-                  },
-                },
-              ]
-            );
-          }}
-        >
+        <TouchableOpacity onPress={() => onRemoveItem()}>
           <FontAwesome name="trash" size={20} color={"#000"}></FontAwesome>
         </TouchableOpacity>
       </View>
