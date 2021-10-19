@@ -6,7 +6,6 @@
 
 import { LinkingOptions } from "@react-navigation/native";
 import * as Linking from "expo-linking";
-
 import { RootStackParamList } from "../types";
 
 const linking: LinkingOptions<RootStackParamList> = {
@@ -17,18 +16,24 @@ const linking: LinkingOptions<RootStackParamList> = {
         screens: {
           TabOne: {
             screens: {
-              TabOneScreen: "one",
+              TabOneScreen: "ideas",
             },
           },
           TabTwo: {
             screens: {
-              TabTwoScreen: "two",
+              TabTwoScreen: "reminders",
+            },
+          },
+          TabThree: {
+            screens: {
+              TabThreeScreen: "todos",
             },
           },
         },
       },
       ModalIdea: "modalIdea",
       ModalReminder: "modalReminder",
+      ModalToDoList: "modalToDoList",
       NotFound: "*",
     },
   },

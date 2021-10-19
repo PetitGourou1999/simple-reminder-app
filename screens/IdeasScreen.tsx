@@ -7,7 +7,6 @@ import {
   TextInput,
 } from "react-native";
 import IdeaCard from "../components/IdeaCard";
-
 import { View } from "../components/Themed";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
@@ -19,7 +18,7 @@ const wait = (timeout: number) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-export default function TabOneScreen({
+export default function IdeasScreen({
   navigation,
 }: RootTabScreenProps<"TabOne">) {
   const colorScheme = useColorScheme();

@@ -1,3 +1,4 @@
+import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import {
   Alert,
@@ -7,17 +8,14 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
-import { View, Text } from "../components/Themed";
-import useColorScheme from "../hooks/useColorScheme";
-import { Reminder, RootStackScreenProps } from "../types";
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
-import DateTimePickerModal from "react-native-modal-datetime-picker";
+import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
-import { FontAwesome } from "@expo/vector-icons";
-import notificationHelper from "../storage/NotificationsHelper";
-import useIsMounted from "../hooks/useIsMounted";
+import { Reminder, RootStackScreenProps } from "../types";
 
 /*function NotificationSender(reminder: Reminder) {
   const isMounted = useIsMounted();

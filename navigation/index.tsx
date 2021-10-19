@@ -6,22 +6,22 @@
 import { FontAwesome } from "@expo/vector-icons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import {
-  NavigationContainer,
-  DefaultTheme,
   DarkTheme,
+  DefaultTheme,
+  NavigationContainer,
 } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
-
 import Colors from "../constants/Colors";
 import useColorScheme from "../hooks/useColorScheme";
+import IdeasScreen from "../screens/IdeasScreen";
 import ModalScreenIdea from "../screens/ModalScreenIdea";
-import ModalScreen from "../screens/ModalScreenIdea";
 import ModalScreenReminder from "../screens/ModalScreenReminder";
+import ModalScreenToDoList from "../screens/ModalScreenToDoList";
 import NotFoundScreen from "../screens/NotFoundScreen";
-import TabOneScreen from "../screens/TabOneScreen";
-import TabTwoScreen from "../screens/TabTwoScreen";
+import RemindersScreen from "../screens/RemindersScreen";
+import ToDoListScreen from "../screens/ToDoListScreen";
 import {
   RootStackParamList,
   RootStackScreenProps,
@@ -82,6 +82,15 @@ function RootNavigator() {
           })}
         />
       </Stack.Group>
+      <Stack.Group screenOptions={{ presentation: "modal" }}>
+        <Stack.Screen
+          name="ModalToDoList"
+          component={ModalScreenToDoList}
+          options={({ navigation }: RootStackScreenProps<"ModalToDoList">) => ({
+            title: "Nouvelle ToDo List",
+          })}
+        />
+      </Stack.Group>
     </Stack.Navigator>
   );
 }
@@ -104,7 +113,7 @@ function BottomTabNavigator() {
     >
       <BottomTab.Screen
         name="TabOne"
-        component={TabOneScreen}
+        component={IdeasScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
           title: "Mes idées",
           tabBarIcon: ({ color }) => <TabBarIcon name="paste" color={color} />,
@@ -127,13 +136,38 @@ function BottomTabNavigator() {
       />
       <BottomTab.Screen
         name="TabTwo"
-        component={TabTwoScreen}
+        component={RemindersScreen}
         options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
           title: "Mes rappels",
           tabBarIcon: ({ color }) => <TabBarIcon name="bell-o" color={color} />,
           headerRight: () => (
             <Pressable
               onPress={() => navigation.navigate("ModalReminder")}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <FontAwesome
+                name="plus-circle"
+                size={25}
+                color={Colors[colorScheme].secondary}
+                style={{ marginRight: 15 }}
+              />
+            </Pressable>
+          ),
+        })}
+      />
+      <BottomTab.Screen
+        name="TabThree"
+        component={ToDoListScreen}
+        options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
+          title: "Mes ToDo Lists",
+          tabBarIcon: ({ color }) => (
+            <TabBarIcon name="check-square-o" color={color} />
+          ),
+          headerRight: () => (
+            <Pressable
+              onPress={() => navigation.navigate("ModalToDoList")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}

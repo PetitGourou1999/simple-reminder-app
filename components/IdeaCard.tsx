@@ -1,11 +1,9 @@
 import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
-import { Alert, StyleSheet } from "react-native";
+import { StyleSheet } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import storageHelper from "../storage/StorageHelper";
-
-import { Idea, IdeaCardParamsList } from "../types";
-import { View, Text } from "./Themed";
+import { IdeaCardParamsList } from "../types";
+import { Text, View } from "./Themed";
 
 export default function IdeaCard({ idea, onRemoveItem }: IdeaCardParamsList) {
   return (

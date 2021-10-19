@@ -1,23 +1,12 @@
 import * as React from "react";
-import {
-  Alert,
-  Platform,
-  Pressable,
-  SafeAreaView,
-  StyleSheet,
-  TextInput,
-} from "react-native";
-import { TouchableOpacity } from "react-native";
-
+import { Alert, StyleSheet, TextInput, TouchableOpacity } from "react-native";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
-import Navigation from "../navigation";
 import storageHelper from "../storage/StorageHelper";
 import { Idea, RootStackScreenProps } from "../types";
-import TabOneScreen from "./TabOneScreen";
 
 export default function ModalScreenIdea({
   navigation,

@@ -31,6 +31,19 @@ export type Reminder = {
   dateTime: Date;
 };
 
+export type ToDoItem = {
+  order: number;
+  description: string;
+  done: number;
+};
+
+export type ToDoList = {
+  storageKey: string;
+  color: string;
+  title: string;
+  toDoItems: ToDoItem[];
+};
+
 export type IdeaCardParamsList = {
   idea: Idea;
   onRemoveItem: any;
@@ -45,6 +58,7 @@ export type RootStackParamList = {
   Root: NavigatorScreenParams<RootTabParamList> | undefined;
   ModalIdea: undefined;
   ModalReminder: undefined;
+  ModalToDoList: undefined;
   NotFound: undefined;
 };
 
@@ -54,6 +68,7 @@ export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
 export type RootTabParamList = {
   TabOne: undefined;
   TabTwo: undefined;
+  TabThree: undefined;
 };
 
 export type RootTabScreenProps<Screen extends keyof RootTabParamList> =

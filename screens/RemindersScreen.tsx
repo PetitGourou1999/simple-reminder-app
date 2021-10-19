@@ -1,7 +1,4 @@
 import * as React from "react";
-import { View } from "../components/Themed";
-import { Reminder, RootTabScreenProps } from "../types";
-
 import {
   RefreshControl,
   SafeAreaView,
@@ -9,19 +6,19 @@ import {
   StyleSheet,
   TextInput,
 } from "react-native";
-import notificationHelper from "../storage/NotificationsHelper";
+import ReminderCard from "../components/ReminderCard";
+import { View } from "../components/Themed";
+import Colors from "../constants/Colors";
+import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
-import globalStyles from "../constants/Styles";
-import Colors from "../constants/Colors";
-import IdeaCard from "../components/IdeaCard";
-import ReminderCard from "../components/ReminderCard";
+import { Reminder, RootTabScreenProps } from "../types";
 
 const wait = (timeout: number) => {
   return new Promise((resolve) => setTimeout(resolve, timeout));
 };
 
-export default function TabTwoScreen({
+export default function RemindersScreen({
   navigation,
 }: RootTabScreenProps<"TabTwo">) {
   const colorScheme = useColorScheme();
