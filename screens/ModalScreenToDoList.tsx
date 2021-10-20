@@ -14,6 +14,7 @@ import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
+import storageHelper from "../storage/StorageHelper";
 import { RootStackScreenProps, ToDoItem, ToDoList } from "../types";
 
 export default function ModalScreenToDoList({
@@ -22,7 +23,17 @@ export default function ModalScreenToDoList({
   const colorScheme = useColorScheme();
   const [selectedColor, setSlectedColor] = React.useState(cardColors[0].color);
   const [toDoTitle, setToDoTitle] = React.useState("");
+
+  const [counter, setCounter] = React.useState(1);
+  const [toDoItemDescription, setToDoItemDescription] = React.useState("");
   const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
+
+  var myToDoList: ToDoList = {
+    storageKey: "",
+    color: "",
+    title: "",
+    toDoItems: [],
+  };
 
   const buttonsListArr = cardColors.map((colorInfo) => (
     <TouchableOpacity
@@ -44,34 +55,76 @@ export default function ModalScreenToDoList({
       return (
         <TouchableOpacity
           style={{
-            height: 100,
+            height: 70,
+            width: "100%",
+            padding: 20,
+            flexDirection: "row",
             alignItems: "center",
-            justifyContent: "center",
+            justifyContent: "space-between",
+            borderColor: Colors[colorScheme].text,
+            borderBottomWidth: 1,
           }}
           onLongPress={drag}
         >
           <Text
             style={{
-              fontWeight: "bold",
-              color: "white",
-              fontSize: 32,
+              color: Colors[colorScheme].text,
+              fontSize: 16,
             }}
           >
-            {item.description}
+            {item.order.toString() + ". " + item.description}
           </Text>
+          <Pressable
+            onPress={() => {
+              removeData(item);
+            }}
+            style={({ pressed }) => ({
+              opacity: pressed ? 0.5 : 1,
+            })}
+          >
+            <FontAwesome
+              name="trash-o"
+              size={30}
+              color={Colors[colorScheme].primary}
+            />
+          </Pressable>
         </TouchableOpacity>
       );
     },
     []
   );
 
-  const addData = () => {};
+  const addData = (desc: string) => {
+    var newItem: ToDoItem = {
+      storageKey: storageHelper.makeid(8),
+      order: counter,
+      description: desc,
+      done: 0,
+    };
+    setCounter((counter) => counter + 1);
+    setToDoItems((toDoItems) => [...toDoItems, newItem]);
+  };
 
-  var myToDoList: ToDoList = {
-    storageKey: "",
-    color: "",
-    title: "",
-    toDoItems: [],
+  const removeData = React.useCallback((itemToDelete: ToDoItem) => {
+    setToDoItems((toDoItems) =>
+      toDoItems.filter((item2) => item2.storageKey !== itemToDelete.storageKey)
+    );
+    setToDoItems((toDoItems) =>
+      toDoItems.map((item2, index) => {
+        var tmp = item2;
+        tmp.order = index + 1;
+        return tmp;
+      })
+    );
+    setCounter((counter) => counter - 1);
+  }, []);
+
+  const handleDrag = (data: ToDoItem[]) => {
+    for (let index = 0; index < data.length; index++) {
+      const element = data[index];
+      element.order = index + 1;
+    }
+    setToDoItems(data);
   };
 
   return (
@@ -104,8 +157,9 @@ export default function ModalScreenToDoList({
         <View
           style={[
             {
-              minWidth: "90%",
+              maxWidth: "80%",
               flexDirection: "row",
+              flexWrap: "wrap",
               justifyContent: "space-between",
               alignItems: "center",
             },
@@ -113,15 +167,19 @@ export default function ModalScreenToDoList({
         >
           <TextInput
             style={[
-              globalStyles.input,
               {
+                minWidth: "60%",
+                borderRadius: 15,
+                padding: 10,
+                margin: 10,
                 backgroundColor: Colors[colorScheme].textBackground,
                 color: Colors[colorScheme].text,
               },
             ]}
+            onChangeText={(text) => setToDoTitle(text)}
           />
           <Pressable
-            onPress={() => setToDoItems((toDoItems) => [...toDoItems])}
+            onPress={() => addData(toDoTitle)}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}
@@ -134,12 +192,19 @@ export default function ModalScreenToDoList({
           </Pressable>
         </View>
       </View>
-      <View style={styles.container}>
+      <View
+        style={{
+          flex: 1,
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         <DraggableFlatList
           data={toDoItems}
           renderItem={renderItem}
           keyExtractor={(item, index) => `draggable-item-${item.order}`}
-          onDragEnd={({ data }) => setToDoItems(data)}
+          onDragEnd={({ data }) => handleDrag(data)}
+          containerStyle={{ maxWidth: "80%" }}
         />
       </View>
     </View>

@@ -32,6 +32,7 @@ export type Reminder = {
 };
 
 export type ToDoItem = {
+  storageKey: string;
   order: number;
   description: string;
   done: number;
