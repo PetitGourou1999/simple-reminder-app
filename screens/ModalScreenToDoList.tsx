@@ -1,13 +1,14 @@
 import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import {
+  Alert,
   Pressable,
   StyleSheet,
   TextInput,
-  TouchableOpacity,
+  TouchableOpacity
 } from "react-native";
 import DraggableFlatList, {
-  RenderItemParams,
+  RenderItemParams
 } from "react-native-draggable-flatlist";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
@@ -25,7 +26,6 @@ export default function ModalScreenToDoList({
   const [toDoTitle, setToDoTitle] = React.useState("");
 
   const [counter, setCounter] = React.useState(1);
-  const [toDoItemDescription, setToDoItemDescription] = React.useState("");
   const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
 
   var myToDoList: ToDoList = {
@@ -176,7 +176,6 @@ export default function ModalScreenToDoList({
                 color: Colors[colorScheme].text,
               },
             ]}
-            onChangeText={(text) => setToDoTitle(text)}
           />
           <Pressable
             onPress={() => addData(toDoTitle)}
@@ -207,6 +206,35 @@ export default function ModalScreenToDoList({
           containerStyle={{ maxWidth: "80%" }}
         />
       </View>
+      <TouchableOpacity
+        onPress={() => {
+          myToDoList.storageKey = storageHelper.makeid(8);
+          myToDoList.color = selectedColor;
+          myToDoList.title = toDoTitle;
+          myToDoList.toDoItems = toDoItems;
+          if (toDoTitle.trim() === "" || toDoItems.length == 0) {
+            Alert.alert(
+              "Saisie invalide",
+              "L'un des champs n'a pas été renseigné"
+            );
+          } else {
+            storageHelper.storeData(myToDoList.storageKey, myToDoList).then(
+              () => {
+                navigation.goBack();
+              },
+              (error) => {
+                console.log(error);
+              }
+            );
+          }
+        }}
+        style={[
+          globalStyles.button,
+          { backgroundColor: Colors[colorScheme].primary },
+        ]}
+      >
+        <Text>Ajouter</Text>
+      </TouchableOpacity>
     </View>
   );
 }

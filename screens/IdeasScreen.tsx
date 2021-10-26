@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  TextInput,
+  TextInput
 } from "react-native";
 import IdeaCard from "../components/IdeaCard";
 import { View } from "../components/Themed";
@@ -61,7 +61,7 @@ export default function IdeasScreen({
             let cpt = 0;
             value.forEach((element) => {
               //Vérification pas rappel
-              if (element.dateTime === undefined) {
+              if (element.dateTime === undefined && element.toDoItems === undefined) {
                 if (cpt % 2 === 0) {
                   setIdeasElementsLeft((ideasElementsLeft) => [
                     ...ideasElementsLeft,

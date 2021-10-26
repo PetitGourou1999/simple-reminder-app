@@ -4,7 +4,7 @@ import {
   SafeAreaView,
   ScrollView,
   StyleSheet,
-  TextInput,
+  TextInput
 } from "react-native";
 import ReminderCard from "../components/ReminderCard";
 import { View } from "../components/Themed";

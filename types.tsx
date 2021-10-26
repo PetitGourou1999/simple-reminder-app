@@ -6,13 +6,13 @@
 import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import {
   CompositeScreenProps,
-  NavigatorScreenParams,
+  NavigatorScreenParams
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
 declare global {
   namespace ReactNavigation {
-    interface RootParamList extends RootStackParamList {}
+    interface RootParamList extends RootStackParamList { }
   }
 }
 
@@ -45,6 +45,11 @@ export type ToDoList = {
   toDoItems: ToDoItem[];
 };
 
+export type ToDoItemCheckBoxState = {
+  item: ToDoItem,
+  value: boolean
+}
+
 export type IdeaCardParamsList = {
   idea: Idea;
   onRemoveItem: any;
@@ -52,6 +57,11 @@ export type IdeaCardParamsList = {
 
 export type ReminderCardParamsList = {
   reminder: Reminder;
+  onRemoveItem: any;
+};
+
+export type ToDoListCardParamsList = {
+  toDoList: ToDoList;
   onRemoveItem: any;
 };
 
