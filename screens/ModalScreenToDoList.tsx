@@ -24,6 +24,7 @@ export default function ModalScreenToDoList({
   const colorScheme = useColorScheme();
   const [selectedColor, setSlectedColor] = React.useState(cardColors[0].color);
   const [toDoTitle, setToDoTitle] = React.useState("");
+  const [toDoItemDesc, setToDoItemDesc] = React.useState("");
 
   const [counter, setCounter] = React.useState(1);
   const [toDoItems, setToDoItems] = React.useState<ToDoItem[]>([]);
@@ -128,7 +129,7 @@ export default function ModalScreenToDoList({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, { paddingVertical: 10 }]}>
       <View style={styles.container}>
         <Text>Couleur : </Text>
         <View
@@ -176,9 +177,10 @@ export default function ModalScreenToDoList({
                 color: Colors[colorScheme].text,
               },
             ]}
+            onChangeText={(text) => setToDoItemDesc(text)}
           />
           <Pressable
-            onPress={() => addData(toDoTitle)}
+            onPress={() => addData(toDoItemDesc)}
             style={({ pressed }) => ({
               opacity: pressed ? 0.5 : 1,
             })}

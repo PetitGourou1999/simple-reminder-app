@@ -3,6 +3,7 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import storageHelper from "../storage/StorageHelper";
 import { ToDoItemCheckBoxState, ToDoListCardParamsList } from "../types";
 import { Text, View } from "./Themed";
 
@@ -29,11 +30,20 @@ export default function ToDoListCard({ toDoList, onRemoveItem }: ToDoListCardPar
             itemsDone.map((wrapper2, index) => {
                 if (wrapper2.item.storageKey === wrapper.item.storageKey) {
                     wrapper2.value = !wrapper2.value
+                    var tmp = toDoList
+                    tmp.toDoItems.forEach((item) => {
+                        if (item.storageKey === wrapper.item.storageKey) {
+                            if (item.done == 1)
+                                item.done = 0
+                            else
+                                item.done = 1
+                        }
+                    })
+                    storageHelper.storeData(tmp.storageKey, tmp)
                 }
                 return wrapper2;
             })
         );
-
     }, []);
 
     return (
@@ -49,6 +59,7 @@ export default function ToDoListCard({ toDoList, onRemoveItem }: ToDoListCardPar
                     return (<View key={wrapper.item.storageKey} style={[styles.item, { backgroundColor: toDoList.color }]}>
                         <CheckBox
                             uncheckedColor={"#000"}
+                            checkedColor={"#000"}
                             containerStyle={{ margin: 0, padding: 0, borderWidth: 0, backgroundColor: toDoList.color }}
                             onPress={() => setItemValue(wrapper)}
                             title={wrapper.item.description}
