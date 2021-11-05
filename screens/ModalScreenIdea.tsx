@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Alert, StyleSheet, TextInput, TouchableOpacity } from "react-native";
+import { Alert, TextInput, TouchableOpacity } from "react-native";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
@@ -27,7 +27,7 @@ export default function ModalScreenIdea({
       key={colorInfo.color}
       onPress={() => setSlectedColor(colorInfo.color)}
       style={[
-        styles.touchableColor,
+        globalStyles.touchableColor,
         {
           backgroundColor: colorInfo.color,
           borderColor: Colors[colorScheme].selectedColor,
@@ -38,7 +38,7 @@ export default function ModalScreenIdea({
   ));
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.containerModal}>
       <Text>Couleur : </Text>
       <View
         style={[
@@ -108,26 +108,3 @@ export default function ModalScreenIdea({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    width: "80%",
-    marginVertical: 5,
-    justifyContent: "center",
-    height: 1,
-  },
-  touchableColor: {
-    width: 25,
-    height: 25,
-    borderRadius: 13,
-  },
-});

@@ -3,8 +3,7 @@ import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
-  TextInput
+  TextInput,
 } from "react-native";
 import ReminderCard from "../components/ReminderCard";
 import { View } from "../components/Themed";
@@ -101,7 +100,7 @@ export default function RemindersScreen({
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <TextInput
         placeholder={"Rechercher..."}
         onChangeText={(text) => setSearchTerm(text)}
@@ -117,7 +116,7 @@ export default function RemindersScreen({
       <SafeAreaView style={[{ flex: 1, flexDirection: "row" }]}>
         <ScrollView>
           <View style={[{ flexDirection: "row" }]}>
-            <View style={[styles.column]}>
+            <View style={[globalStyles.column]}>
               {ideasElementsLeft
                 .filter((value) => {
                   if (serachTerm.trim() === "") {
@@ -138,7 +137,7 @@ export default function RemindersScreen({
                   );
                 })}
             </View>
-            <View style={[styles.column]}>
+            <View style={[globalStyles.column]}>
               {ideasElementsRight
                 .filter((value) => {
                   if (serachTerm.trim() === "") {
@@ -166,19 +165,3 @@ export default function RemindersScreen({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-  column: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});

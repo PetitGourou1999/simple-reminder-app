@@ -3,8 +3,7 @@ import {
   RefreshControl,
   SafeAreaView,
   ScrollView,
-  StyleSheet,
-  TextInput
+  TextInput,
 } from "react-native";
 import IdeaCard from "../components/IdeaCard";
 import { View } from "../components/Themed";
@@ -61,7 +60,10 @@ export default function IdeasScreen({
             let cpt = 0;
             value.forEach((element) => {
               //Vérification pas rappel
-              if (element.dateTime === undefined && element.toDoItems === undefined) {
+              if (
+                element.dateTime === undefined &&
+                element.toDoItems === undefined
+              ) {
                 if (cpt % 2 === 0) {
                   setIdeasElementsLeft((ideasElementsLeft) => [
                     ...ideasElementsLeft,
@@ -99,7 +101,7 @@ export default function IdeasScreen({
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <TextInput
         placeholder={"Rechercher..."}
         onChangeText={(text) => setSearchTerm(text)}
@@ -115,7 +117,7 @@ export default function IdeasScreen({
       <SafeAreaView style={[{ flex: 1, flexDirection: "row" }]}>
         <ScrollView>
           <View style={[{ flexDirection: "row" }]}>
-            <View style={[styles.column]}>
+            <View style={[globalStyles.column]}>
               {ideasElementsLeft
                 .filter((value) => {
                   if (serachTerm.trim() === "") {
@@ -138,7 +140,7 @@ export default function IdeasScreen({
                   }
                 })}
             </View>
-            <View style={[styles.column]}>
+            <View style={[globalStyles.column]}>
               {ideasElementsRight
                 .filter((value) => {
                   if (serachTerm.trim() === "") {
@@ -168,19 +170,3 @@ export default function IdeasScreen({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-  column: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});

@@ -90,7 +90,7 @@ export default function ModalScreenReminder({
       key={colorInfo.color}
       onPress={() => setSlectedColor(colorInfo.color)}
       style={[
-        styles.touchableColor,
+        globalStyles.touchableColor,
         {
           backgroundColor: colorInfo.color,
           borderColor: Colors[colorScheme].selectedColor,
@@ -101,9 +101,9 @@ export default function ModalScreenReminder({
   ));
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.containerModal}>
       <SafeAreaView>
-        <ScrollView contentContainerStyle={[styles.container]}>
+        <ScrollView contentContainerStyle={globalStyles.containerModal}>
           <Text>Couleur : </Text>
           <View
             style={[
@@ -230,31 +230,11 @@ export default function ModalScreenReminder({
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
   datePickerContainer: {
     width: "80%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    width: "80%",
-    marginVertical: 5,
-    justifyContent: "center",
-    height: 1,
-  },
-  touchableColor: {
-    width: 25,
-    height: 25,
-    borderRadius: 13,
   },
 });

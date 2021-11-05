@@ -1,14 +1,8 @@
 import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
-import {
-  Alert,
-  Pressable,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity
-} from "react-native";
+import { Alert, Pressable, TextInput, TouchableOpacity } from "react-native";
 import DraggableFlatList, {
-  RenderItemParams
+  RenderItemParams,
 } from "react-native-draggable-flatlist";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
@@ -41,7 +35,7 @@ export default function ModalScreenToDoList({
       key={colorInfo.color}
       onPress={() => setSlectedColor(colorInfo.color)}
       style={[
-        styles.touchableColor,
+        globalStyles.touchableColor,
         {
           backgroundColor: colorInfo.color,
           borderColor: Colors[colorScheme].selectedColor,
@@ -129,8 +123,8 @@ export default function ModalScreenToDoList({
   };
 
   return (
-    <View style={[styles.container, { paddingVertical: 10 }]}>
-      <View style={styles.container}>
+    <View style={[globalStyles.containerModal, { paddingVertical: 10 }]}>
+      <View style={globalStyles.containerModal}>
         <Text>Couleur : </Text>
         <View
           style={[
@@ -240,26 +234,3 @@ export default function ModalScreenToDoList({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-  separator: {
-    width: "80%",
-    marginVertical: 5,
-    justifyContent: "center",
-    height: 1,
-  },
-  touchableColor: {
-    width: 25,
-    height: 25,
-    borderRadius: 13,
-  },
-});

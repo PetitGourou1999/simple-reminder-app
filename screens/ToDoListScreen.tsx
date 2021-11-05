@@ -1,5 +1,10 @@
 import * as React from "react";
-import { RefreshControl, SafeAreaView, ScrollView, StyleSheet, TextInput } from "react-native";
+import {
+  RefreshControl,
+  SafeAreaView,
+  ScrollView,
+  TextInput,
+} from "react-native";
 import { View } from "../components/Themed";
 import ToDoListCard from "../components/ToDoListCard";
 import Colors from "../constants/Colors";
@@ -20,10 +25,12 @@ export default function ToDoListScreen({
   const [serachTerm, setSearchTerm] = React.useState("");
 
   const [ideasLoaded, setIdeasLoaded] = React.useState(false);
-  const [ideasElementsLeft, setIdeasElementsLeft] = React.useState<ToDoList[]>([]);
-  const [ideasElementsRight, setIdeasElementsRight] = React.useState<ToDoList[]>(
+  const [ideasElementsLeft, setIdeasElementsLeft] = React.useState<ToDoList[]>(
     []
   );
+  const [ideasElementsRight, setIdeasElementsRight] = React.useState<
+    ToDoList[]
+  >([]);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -92,87 +99,73 @@ export default function ToDoListScreen({
     });
   }, []);
 
-  return (<View style={styles.container}>
-    <TextInput
-      placeholder={"Rechercher..."}
-      onChangeText={(text) => setSearchTerm(text)}
-      style={[
-        globalStyles.input,
-        {
-          backgroundColor: Colors[colorScheme].textBackground,
-          color: Colors[colorScheme].text,
-          alignSelf: "center",
-        },
-      ]}
-    ></TextInput>
-    <SafeAreaView style={[{ flex: 1, flexDirection: "row" }]}>
-      <ScrollView>
-        <View style={[{ flexDirection: "row" }]}>
-          <View style={[styles.column]}>
-            {ideasElementsLeft
-              .filter((value) => {
-                if (serachTerm.trim() === "") {
-                  return value;
-                } else if (
-                  value.title.toLowerCase().includes(serachTerm.toLowerCase())
-                ) {
-                  return value;
-                }
-              })
-              .map((val, key) => {
-                if (val !== null) {
-                  return (
-                    <ToDoListCard
-                      key={val.storageKey}
-                      toDoList={val}
-                      onRemoveItem={() => removeItem(val.storageKey)}
-                    ></ToDoListCard>
-                  );
-                }
-              })}
+  return (
+    <View style={globalStyles.container}>
+      <TextInput
+        placeholder={"Rechercher..."}
+        onChangeText={(text) => setSearchTerm(text)}
+        style={[
+          globalStyles.input,
+          {
+            backgroundColor: Colors[colorScheme].textBackground,
+            color: Colors[colorScheme].text,
+            alignSelf: "center",
+          },
+        ]}
+      ></TextInput>
+      <SafeAreaView style={[{ flex: 1, flexDirection: "row" }]}>
+        <ScrollView>
+          <View style={[{ flexDirection: "row" }]}>
+            <View style={[globalStyles.column]}>
+              {ideasElementsLeft
+                .filter((value) => {
+                  if (serachTerm.trim() === "") {
+                    return value;
+                  } else if (
+                    value.title.toLowerCase().includes(serachTerm.toLowerCase())
+                  ) {
+                    return value;
+                  }
+                })
+                .map((val, key) => {
+                  if (val !== null) {
+                    return (
+                      <ToDoListCard
+                        key={val.storageKey}
+                        toDoList={val}
+                        onRemoveItem={() => removeItem(val.storageKey)}
+                      ></ToDoListCard>
+                    );
+                  }
+                })}
+            </View>
+            <View style={[globalStyles.column]}>
+              {ideasElementsRight
+                .filter((value) => {
+                  if (serachTerm.trim() === "") {
+                    return value;
+                  } else if (
+                    value.title.toLowerCase().includes(serachTerm.toLowerCase())
+                  ) {
+                    return value;
+                  }
+                })
+                .map((val, key) => {
+                  if (val !== null) {
+                    return (
+                      <ToDoListCard
+                        key={val.storageKey}
+                        toDoList={val}
+                        onRemoveItem={() => removeItem(val.storageKey)}
+                      ></ToDoListCard>
+                    );
+                  }
+                })}
+            </View>
           </View>
-          <View style={[styles.column]}>
-            {ideasElementsRight
-              .filter((value) => {
-                if (serachTerm.trim() === "") {
-                  return value;
-                } else if (
-                  value.title.toLowerCase().includes(serachTerm.toLowerCase())
-                ) {
-                  return value;
-                }
-              })
-              .map((val, key) => {
-                if (val !== null) {
-                  return (
-                    <ToDoListCard
-                      key={val.storageKey}
-                      toDoList={val}
-                      onRemoveItem={() => removeItem(val.storageKey)}
-                    ></ToDoListCard>
-                  );
-                }
-              })}
-          </View>
-        </View>
-        <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
-      </ScrollView>
-    </SafeAreaView>
-  </View>);
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        </ScrollView>
+      </SafeAreaView>
+    </View>
+  );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-  column: {
-    flex: 1,
-    flexDirection: "column",
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 20,
-    fontWeight: "bold",
-  },
-});
