@@ -134,7 +134,7 @@ export default function ModalScreenToDoList({
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === "ios" ? "padding" : "height"}
-      style={[globalStyles.containerModal, { paddingVertical: 10 }]}
+      style={[globalStyles.containerModal, { paddingVertical: 20 }]}
     >
       <View style={globalStyles.containerModal}>
         <Text>{Strings.colorLabel}</Text>

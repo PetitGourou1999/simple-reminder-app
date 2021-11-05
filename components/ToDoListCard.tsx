@@ -51,7 +51,10 @@ export default function ToDoListCard({
 
   return (
     <View
-      style={[globalStyles.containerCard, { backgroundColor: toDoList.color }]}
+      style={[
+        globalStyles.containerCard,
+        { backgroundColor: toDoList.color, width: "95%" },
+      ]}
     >
       <View
         style={[globalStyles.topBarCard, { backgroundColor: toDoList.color }]}

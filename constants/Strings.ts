@@ -25,5 +25,5 @@ export default {
   buttonAjouterLabel: "Ajouter",
 
   alertSaisieTitle: "Saisie invalide",
-  alertSaisieLabel: "L'un des champs n'a pas été renseigné",
+  alertSaisieLabel: "L'un des champs n'a pas été renseigné.",
 };

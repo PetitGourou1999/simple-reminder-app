@@ -29,9 +29,6 @@ export default function ToDoListScreen({
   const [ideasElementsLeft, setIdeasElementsLeft] = React.useState<ToDoList[]>(
     []
   );
-  const [ideasElementsRight, setIdeasElementsRight] = React.useState<
-    ToDoList[]
-  >([]);
 
   const [refreshing, setRefreshing] = React.useState(false);
 
@@ -39,7 +36,6 @@ export default function ToDoListScreen({
     storageHelper.removeData(storageKey).then(
       () => {
         setIdeasElementsLeft((ideasElementsLeft) => []);
-        setIdeasElementsRight((ideasElementsRight) => []);
         setIdeasLoaded(false);
         loadItems();
       },
@@ -50,31 +46,21 @@ export default function ToDoListScreen({
   };
 
   const loadItems = () => {
-    if (
-      ideasElementsLeft.length === 0 &&
-      ideasElementsRight.length === 0 &&
-      !ideasLoaded
-    ) {
+    if (ideasElementsLeft.length === 0 && !ideasLoaded) {
       storageHelper.getAllItems().then(
         (value) => {
           setIdeasElementsLeft((ideasElementsLeft) => []);
-          setIdeasElementsRight((ideasElementsRight) => []);
+
           if (value !== undefined) {
             let cpt = 0;
             value.forEach((element) => {
               //Vérification pas rappel ou idée
               if (element.toDoItems !== undefined) {
-                if (cpt % 2 === 0) {
-                  setIdeasElementsLeft((ideasElementsLeft) => [
-                    ...ideasElementsLeft,
-                    element,
-                  ]);
-                } else {
-                  setIdeasElementsRight((ideasElementsRight) => [
-                    ...ideasElementsRight,
-                    element,
-                  ]);
-                }
+                setIdeasElementsLeft((ideasElementsLeft) => [
+                  ...ideasElementsLeft,
+                  element,
+                ]);
+
                 cpt++;
               }
             });
@@ -119,29 +105,6 @@ export default function ToDoListScreen({
           <View style={[{ flexDirection: "row" }]}>
             <View style={[globalStyles.column]}>
               {ideasElementsLeft
-                .filter((value) => {
-                  if (serachTerm.trim() === "") {
-                    return value;
-                  } else if (
-                    value.title.toLowerCase().includes(serachTerm.toLowerCase())
-                  ) {
-                    return value;
-                  }
-                })
-                .map((val, key) => {
-                  if (val !== null) {
-                    return (
-                      <ToDoListCard
-                        key={val.storageKey}
-                        toDoList={val}
-                        onRemoveItem={() => removeItem(val.storageKey)}
-                      ></ToDoListCard>
-                    );
-                  }
-                })}
-            </View>
-            <View style={[globalStyles.column]}>
-              {ideasElementsRight
                 .filter((value) => {
                   if (serachTerm.trim() === "") {
                     return value;
