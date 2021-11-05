@@ -106,15 +106,7 @@ export default function ModalScreenReminder({
       <SafeAreaView>
         <ScrollView contentContainerStyle={globalStyles.containerModal}>
           <Text>{Strings.colorLabel}</Text>
-          <View
-            style={[
-              {
-                width: "80%",
-                flexDirection: "row",
-                justifyContent: "space-around",
-              },
-            ]}
-          >
+          <View style={[globalStyles.touchableColorContainer]}>
             {buttonsListArr}
           </View>
           <Text>{Strings.reminderDateLabel}</Text>
@@ -148,15 +140,7 @@ export default function ModalScreenReminder({
               onPress={() => {
                 showDatePicker();
               }}
-              style={[
-                {
-                  alignItems: "center",
-                  justifyContent: "center",
-                  alignContent: "center",
-                  borderRadius: 20,
-                  marginLeft: -50,
-                },
-              ]}
+              style={[styles.calendarButton]}
             >
               <FontAwesome
                 name="calendar"
@@ -234,5 +218,12 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     alignContent: "center",
     alignItems: "center",
+  },
+  calendarButton: {
+    alignItems: "center",
+    justifyContent: "center",
+    alignContent: "center",
+    borderRadius: 20,
+    marginLeft: -50,
   },
 });

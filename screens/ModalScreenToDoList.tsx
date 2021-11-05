@@ -1,6 +1,12 @@
 import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
-import { Alert, Pressable, TextInput, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  Pressable,
+  StyleSheet,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import DraggableFlatList, {
   RenderItemParams,
 } from "react-native-draggable-flatlist";
@@ -127,15 +133,7 @@ export default function ModalScreenToDoList({
     <View style={[globalStyles.containerModal, { paddingVertical: 10 }]}>
       <View style={globalStyles.containerModal}>
         <Text>{Strings.colorLabel}</Text>
-        <View
-          style={[
-            {
-              minWidth: "80%",
-              flexDirection: "row",
-              justifyContent: "space-around",
-            },
-          ]}
-        >
+        <View style={[globalStyles.touchableColorContainer]}>
           {buttonsListArr}
         </View>
         <Text>{Strings.toDoTitleLabel}</Text>
@@ -150,24 +148,11 @@ export default function ModalScreenToDoList({
           ]}
         />
         <Text>{Strings.toDoAddItemLabel}</Text>
-        <View
-          style={[
-            {
-              maxWidth: "80%",
-              flexDirection: "row",
-              flexWrap: "wrap",
-              justifyContent: "space-between",
-              alignItems: "center",
-            },
-          ]}
-        >
+        <View style={[styles.containerItemField]}>
           <TextInput
             style={[
+              styles.newItemInput,
               {
-                minWidth: "60%",
-                borderRadius: 15,
-                padding: 10,
-                margin: 10,
                 backgroundColor: Colors[colorScheme].textBackground,
                 color: Colors[colorScheme].text,
               },
@@ -188,13 +173,7 @@ export default function ModalScreenToDoList({
           </Pressable>
         </View>
       </View>
-      <View
-        style={{
-          flex: 1,
-          alignItems: "center",
-          justifyContent: "center",
-        }}
-      >
+      <View style={styles.containerList}>
         <DraggableFlatList
           data={toDoItems}
           renderItem={renderItem}
@@ -232,3 +211,24 @@ export default function ModalScreenToDoList({
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  containerList: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  containerItemField: {
+    maxWidth: "80%",
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  newItemInput: {
+    minWidth: "60%",
+    borderRadius: 15,
+    padding: 10,
+    margin: 10,
+  },
+});

@@ -27,6 +27,11 @@ const globalStyles = StyleSheet.create({
     height: 25,
     borderRadius: 13,
   },
+  touchableColorContainer: {
+    minWidth: "80%",
+    flexDirection: "row",
+    justifyContent: "space-around",
+  },
   /*-----------FORMS-----------*/
   input: {
     minWidth: "80%",

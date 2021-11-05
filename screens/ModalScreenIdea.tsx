@@ -41,15 +41,7 @@ export default function ModalScreenIdea({
   return (
     <View style={globalStyles.containerModal}>
       <Text>{Strings.colorLabel}</Text>
-      <View
-        style={[
-          {
-            minWidth: "80%",
-            flexDirection: "row",
-            justifyContent: "space-around",
-          },
-        ]}
-      >
+      <View style={[globalStyles.touchableColorContainer]}>
         {buttonsListArr}
       </View>
       <Text>{Strings.ideaTitlelabel}</Text>
