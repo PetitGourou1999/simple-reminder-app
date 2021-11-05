@@ -3,6 +3,7 @@ import { Alert, TextInput, TouchableOpacity } from "react-native";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
+import Strings from "../constants/Strings";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
@@ -39,7 +40,7 @@ export default function ModalScreenIdea({
 
   return (
     <View style={globalStyles.containerModal}>
-      <Text>Couleur : </Text>
+      <Text>{Strings.colorLabel}</Text>
       <View
         style={[
           {
@@ -51,7 +52,7 @@ export default function ModalScreenIdea({
       >
         {buttonsListArr}
       </View>
-      <Text>Titre de l'idée : </Text>
+      <Text>{Strings.ideaTitlelabel}</Text>
       <TextInput
         onChangeText={(text) => setIdeaTitle(text)}
         style={[
@@ -62,7 +63,7 @@ export default function ModalScreenIdea({
           },
         ]}
       />
-      <Text>Description de l'idée : </Text>
+      <Text>{Strings.ideaDescriptionLabel}</Text>
       <TextInput
         onChangeText={(text) => setIdeaDescritpion(text)}
         multiline={true}
@@ -83,10 +84,7 @@ export default function ModalScreenIdea({
           myIdea.title = ideaTitle;
           myIdea.description = ideaDescription;
           if (ideaTitle.trim() === "" || ideaDescription.trim() === "") {
-            Alert.alert(
-              "Saisie invalide",
-              "L'un des champs n'a pas été renseigné"
-            );
+            Alert.alert(Strings.alertSaisieTitle, Strings.alertSaisieLabel);
           } else {
             storageHelper.storeData(myIdea.storageKey, myIdea).then(
               () => {
@@ -103,7 +101,7 @@ export default function ModalScreenIdea({
           { backgroundColor: Colors[colorScheme].primary },
         ]}
       >
-        <Text>Ajouter</Text>
+        <Text>{Strings.buttonAjouterLabel}</Text>
       </TouchableOpacity>
     </View>
   );

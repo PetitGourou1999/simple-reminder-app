@@ -12,6 +12,7 @@ import DateTimePickerModal from "react-native-modal-datetime-picker";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
+import Strings from "../constants/Strings";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
@@ -104,7 +105,7 @@ export default function ModalScreenReminder({
     <View style={globalStyles.containerModal}>
       <SafeAreaView>
         <ScrollView contentContainerStyle={globalStyles.containerModal}>
-          <Text>Couleur : </Text>
+          <Text>{Strings.colorLabel}</Text>
           <View
             style={[
               {
@@ -116,7 +117,7 @@ export default function ModalScreenReminder({
           >
             {buttonsListArr}
           </View>
-          <Text>Date du rappel : </Text>
+          <Text>{Strings.reminderDateLabel}</Text>
           <View
             style={[
               styles.datePickerContainer,
@@ -164,7 +165,7 @@ export default function ModalScreenReminder({
               ></FontAwesome>
             </TouchableOpacity>
           </View>
-          <Text>Titre du rappel : </Text>
+          <Text>{Strings.reminderTitlelabel}</Text>
           <TextInput
             onChangeText={(text) => setReminderTitle(text)}
             style={[
@@ -175,7 +176,7 @@ export default function ModalScreenReminder({
               },
             ]}
           />
-          <Text>Description du rappel : </Text>
+          <Text>{Strings.reminderDescriptionLabel}</Text>
           <TextInput
             onChangeText={(text) => setReminderDescritpion(text)}
             multiline={true}
@@ -200,10 +201,7 @@ export default function ModalScreenReminder({
                 reminderTitle.trim() === "" ||
                 reminderDescription.trim() === ""
               ) {
-                Alert.alert(
-                  "Saisie invalide",
-                  "L'un des champs n'a pas été renseigné"
-                );
+                Alert.alert(Strings.alertSaisieTitle, Strings.alertSaisieLabel);
               } else {
                 storageHelper.storeData(myReminder.storageKey, myReminder).then(
                   () => {
@@ -221,7 +219,7 @@ export default function ModalScreenReminder({
               { backgroundColor: Colors[colorScheme].primary },
             ]}
           >
-            <Text>Ajouter</Text>
+            <Text>{Strings.buttonAjouterLabel}</Text>
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>

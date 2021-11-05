@@ -3,6 +3,7 @@ import * as React from "react";
 import { StyleSheet } from "react-native";
 import { CheckBox } from "react-native-elements";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import Colors from "../constants/Colors";
 import globalStyles from "../constants/Styles";
 import storageHelper from "../storage/StorageHelper";
 import { ToDoItemCheckBoxState, ToDoListCardParamsList } from "../types";
@@ -57,7 +58,11 @@ export default function ToDoListCard({
       >
         <Text style={globalStyles.titleCard}>{toDoList.title}</Text>
         <TouchableOpacity onPress={() => onRemoveItem()}>
-          <FontAwesome name="trash" size={20} color={"#000"}></FontAwesome>
+          <FontAwesome
+            name="trash"
+            size={20}
+            color={Colors["light"].text}
+          ></FontAwesome>
         </TouchableOpacity>
       </View>
       <View style={{ flexDirection: "column" }}>
@@ -68,8 +73,8 @@ export default function ToDoListCard({
               style={[styles.item, { backgroundColor: toDoList.color }]}
             >
               <CheckBox
-                uncheckedColor={"#000"}
-                checkedColor={"#000"}
+                uncheckedColor={Colors["light"].text}
+                checkedColor={Colors["light"].text}
                 containerStyle={{
                   margin: 0,
                   padding: 0,

@@ -8,6 +8,7 @@ import {
 import { View } from "../components/Themed";
 import ToDoListCard from "../components/ToDoListCard";
 import Colors from "../constants/Colors";
+import Strings from "../constants/Strings";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
@@ -102,7 +103,7 @@ export default function ToDoListScreen({
   return (
     <View style={globalStyles.container}>
       <TextInput
-        placeholder={"Rechercher..."}
+        placeholder={Strings.researchPlaceholder}
         onChangeText={(text) => setSearchTerm(text)}
         style={[
           globalStyles.input,

@@ -14,6 +14,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable } from "react-native";
 import Colors from "../constants/Colors";
+import Strings from "../constants/Strings";
 import useColorScheme from "../hooks/useColorScheme";
 import IdeasScreen from "../screens/IdeasScreen";
 import ModalScreenIdea from "../screens/ModalScreenIdea";
@@ -62,14 +63,14 @@ function RootNavigator() {
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
-        options={{ title: "Oops!" }}
+        options={{ title: Strings.titleNotFound }}
       />
       <Stack.Group screenOptions={{ presentation: "modal" }}>
         <Stack.Screen
           name="ModalIdea"
           component={ModalScreenIdea}
           options={({ navigation }: RootStackScreenProps<"ModalIdea">) => ({
-            title: "Nouvelle idée",
+            title: Strings.titleNewIdea,
           })}
         />
       </Stack.Group>
@@ -78,7 +79,7 @@ function RootNavigator() {
           name="ModalReminder"
           component={ModalScreenReminder}
           options={({ navigation }: RootStackScreenProps<"ModalReminder">) => ({
-            title: "Nouveau rappel",
+            title: Strings.titleNewReminder,
           })}
         />
       </Stack.Group>
@@ -87,7 +88,7 @@ function RootNavigator() {
           name="ModalToDoList"
           component={ModalScreenToDoList}
           options={({ navigation }: RootStackScreenProps<"ModalToDoList">) => ({
-            title: "Nouvelle ToDo List",
+            title: Strings.titleNewToDo,
           })}
         />
       </Stack.Group>
@@ -115,7 +116,7 @@ function BottomTabNavigator() {
         name="TabOne"
         component={IdeasScreen}
         options={({ navigation }: RootTabScreenProps<"TabOne">) => ({
-          title: "Mes idées",
+          title: Strings.titleMyIdeas,
           tabBarIcon: ({ color }) => <TabBarIcon name="paste" color={color} />,
           headerRight: () => (
             <Pressable
@@ -138,7 +139,7 @@ function BottomTabNavigator() {
         name="TabTwo"
         component={RemindersScreen}
         options={({ navigation }: RootTabScreenProps<"TabTwo">) => ({
-          title: "Mes rappels",
+          title: Strings.titleMyReminders,
           tabBarIcon: ({ color }) => <TabBarIcon name="bell-o" color={color} />,
           headerRight: () => (
             <Pressable
@@ -161,7 +162,7 @@ function BottomTabNavigator() {
         name="TabThree"
         component={ToDoListScreen}
         options={({ navigation }: RootTabScreenProps<"TabThree">) => ({
-          title: "Mes ToDo Lists",
+          title: Strings.titleMyToDos,
           tabBarIcon: ({ color }) => (
             <TabBarIcon name="check-square-o" color={color} />
           ),

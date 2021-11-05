@@ -7,6 +7,7 @@ import DraggableFlatList, {
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
+import Strings from "../constants/Strings";
 import globalStyles from "../constants/Styles";
 import useColorScheme from "../hooks/useColorScheme";
 import storageHelper from "../storage/StorageHelper";
@@ -125,7 +126,7 @@ export default function ModalScreenToDoList({
   return (
     <View style={[globalStyles.containerModal, { paddingVertical: 10 }]}>
       <View style={globalStyles.containerModal}>
-        <Text>Couleur : </Text>
+        <Text>{Strings.colorLabel}</Text>
         <View
           style={[
             {
@@ -137,7 +138,7 @@ export default function ModalScreenToDoList({
         >
           {buttonsListArr}
         </View>
-        <Text>Titre de la liste : </Text>
+        <Text>{Strings.toDoTitleLabel}</Text>
         <TextInput
           onChangeText={(text) => setToDoTitle(text)}
           style={[
@@ -148,7 +149,7 @@ export default function ModalScreenToDoList({
             },
           ]}
         />
-        <Text>Ajouter une tâche : </Text>
+        <Text>{Strings.toDoAddItemLabel}</Text>
         <View
           style={[
             {
@@ -209,10 +210,7 @@ export default function ModalScreenToDoList({
           myToDoList.title = toDoTitle;
           myToDoList.toDoItems = toDoItems;
           if (toDoTitle.trim() === "" || toDoItems.length == 0) {
-            Alert.alert(
-              "Saisie invalide",
-              "L'un des champs n'a pas été renseigné"
-            );
+            Alert.alert(Strings.alertSaisieTitle, Strings.alertSaisieLabel);
           } else {
             storageHelper.storeData(myToDoList.storageKey, myToDoList).then(
               () => {
@@ -229,7 +227,7 @@ export default function ModalScreenToDoList({
           { backgroundColor: Colors[colorScheme].primary },
         ]}
       >
-        <Text>Ajouter</Text>
+        <Text>{Strings.buttonAjouterLabel}</Text>
       </TouchableOpacity>
     </View>
   );
