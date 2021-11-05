@@ -1,5 +1,11 @@
 import * as React from "react";
-import { Alert, TextInput, TouchableOpacity } from "react-native";
+import {
+  Alert,
+  KeyboardAvoidingView,
+  Platform,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { Text, View } from "../components/Themed";
 import cardColors from "../constants/CardColors";
 import Colors from "../constants/Colors";
@@ -39,7 +45,10 @@ export default function ModalScreenIdea({
   ));
 
   return (
-    <View style={globalStyles.containerModal}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={globalStyles.containerModal}
+    >
       <Text>{Strings.colorLabel}</Text>
       <View style={[globalStyles.touchableColorContainer]}>
         {buttonsListArr}
@@ -95,6 +104,6 @@ export default function ModalScreenIdea({
       >
         <Text>{Strings.buttonAjouterLabel}</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }

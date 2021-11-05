@@ -2,6 +2,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import {
   Alert,
+  KeyboardAvoidingView,
+  Platform,
   SafeAreaView,
   ScrollView,
   StyleSheet,
@@ -102,7 +104,10 @@ export default function ModalScreenReminder({
   ));
 
   return (
-    <View style={globalStyles.containerModal}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={globalStyles.containerModal}
+    >
       <SafeAreaView>
         <ScrollView contentContainerStyle={globalStyles.containerModal}>
           <Text>{Strings.colorLabel}</Text>
@@ -207,7 +212,7 @@ export default function ModalScreenReminder({
           </TouchableOpacity>
         </ScrollView>
       </SafeAreaView>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 

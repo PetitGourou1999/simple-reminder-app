@@ -2,6 +2,8 @@ import { FontAwesome } from "@expo/vector-icons";
 import * as React from "react";
 import {
   Alert,
+  KeyboardAvoidingView,
+  Platform,
   Pressable,
   StyleSheet,
   TextInput,
@@ -130,7 +132,10 @@ export default function ModalScreenToDoList({
   };
 
   return (
-    <View style={[globalStyles.containerModal, { paddingVertical: 10 }]}>
+    <KeyboardAvoidingView
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      style={[globalStyles.containerModal, { paddingVertical: 10 }]}
+    >
       <View style={globalStyles.containerModal}>
         <Text>{Strings.colorLabel}</Text>
         <View style={[globalStyles.touchableColorContainer]}>
@@ -208,7 +213,7 @@ export default function ModalScreenToDoList({
       >
         <Text>{Strings.buttonAjouterLabel}</Text>
       </TouchableOpacity>
-    </View>
+    </KeyboardAvoidingView>
   );
 }
 
